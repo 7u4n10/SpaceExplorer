@@ -1,0 +1,11 @@
+ea4bc82a6ad023ab7ee23ee620429895
+::res://::1746652320
+icon.svg::CompressedTexture2D::451836274603217754::1746607043::1746607077::1::::<><><>0<>0<>df73fa0f0806f53eb47d86f0dc9abbee<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
+::res://assets/::1746651554
+::res://scenes/::1746652351
+MainScene.tscn::PackedScene::6303082172903025056::1746652132::0::1::::<><><>0<>0<><>::
+PlanetBody.tscn::PackedScene::1603475730318530231::1746652509::0::1::::<><><>0<>0<><>::uid://bljcmlvas6tf8::::res://scenes/PlanetBody.cs
+PlanetBody.cs::CSharpScript::3177220837233425903::1746652351::0::1::::<><><>0<>0<><>::
+::res://scripts/::1746651548
+::res://shaders/::1746651563
+::res://ui/::1746651559

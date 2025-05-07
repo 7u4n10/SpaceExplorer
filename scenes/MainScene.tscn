@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=3 uid="uid://cv2i3v6ptvt73"]
+
+[ext_resource type="Script" uid="uid://dq4ckw83kpn0p" path="res://scripts/MainScene.cs" id="1_echbf"]
+[ext_resource type="Script" uid="uid://debryqmr8co7i" path="res://scripts/MainCamera.cs" id="2_ibiss"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qg23i"]
+
+[sub_resource type="Sky" id="Sky_echbf"]
+sky_material = SubResource("ProceduralSkyMaterial_qg23i")
+
+[sub_resource type="Environment" id="Environment_qg23i"]
+background_mode = 2
+sky = SubResource("Sky_echbf")
+
+[node name="MainScene" type="Node3D"]
+script = ExtResource("1_echbf")
+
+[node name="MainCamera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 30)
+current = true
+script = ExtResource("2_ibiss")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_qg23i")

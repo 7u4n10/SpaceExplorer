@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://w30amyv4oxhn"]
+
+[ext_resource type="Script" uid="uid://bljcmlvas6tf8" path="res://scripts/PlanetBody.cs" id="1_yyvrs"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_hpq1p"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_yyvrs"]
+
+[node name="PlanetBody" type="RigidBody3D"]
+script = ExtResource("1_yyvrs")
+
+[node name="Visual" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_hpq1p")
+
+[node name="CollisionShape" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_yyvrs")

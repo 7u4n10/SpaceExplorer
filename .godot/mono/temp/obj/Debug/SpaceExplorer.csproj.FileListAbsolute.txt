@@ -1,0 +1,17 @@
+C:\Users\tuanv\Projects\SpaceExplorer\.godot\mono\temp\obj\Debug\SpaceExplorer.csproj.AssemblyReference.cache
+C:\Users\tuanv\Projects\SpaceExplorer\.godot\mono\temp\obj\Debug\SpaceExplorer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\tuanv\Projects\SpaceExplorer\.godot\mono\temp\obj\Debug\SpaceExplorer.AssemblyInfoInputs.cache
+C:\Users\tuanv\Projects\SpaceExplorer\.godot\mono\temp\obj\Debug\SpaceExplorer.AssemblyInfo.cs
+C:\Users\tuanv\Projects\SpaceExplorer\.godot\mono\temp\obj\Debug\SpaceExplorer.csproj.CoreCompileInputs.cache
+C:\Users\tuanv\Projects\SpaceExplorer\.godot\mono\temp\bin\Debug\SpaceExplorer.deps.json
+C:\Users\tuanv\Projects\SpaceExplorer\.godot\mono\temp\bin\Debug\SpaceExplorer.runtimeconfig.json
+C:\Users\tuanv\Projects\SpaceExplorer\.godot\mono\temp\bin\Debug\SpaceExplorer.dll
+C:\Users\tuanv\Projects\SpaceExplorer\.godot\mono\temp\bin\Debug\SpaceExplorer.pdb
+C:\Users\tuanv\Projects\SpaceExplorer\.godot\mono\temp\bin\Debug\GodotSharp.dll
+C:\Users\tuanv\Projects\SpaceExplorer\.godot\mono\temp\bin\Debug\GodotSharpEditor.dll
+C:\Users\tuanv\Projects\SpaceExplorer\.godot\mono\temp\obj\Debug\SpaceExp.8626FD44.Up2Date
+C:\Users\tuanv\Projects\SpaceExplorer\.godot\mono\temp\obj\Debug\SpaceExplorer.dll
+C:\Users\tuanv\Projects\SpaceExplorer\.godot\mono\temp\obj\Debug\refint\SpaceExplorer.dll
+C:\Users\tuanv\Projects\SpaceExplorer\.godot\mono\temp\obj\Debug\SpaceExplorer.pdb
+C:\Users\tuanv\Projects\SpaceExplorer\.godot\mono\temp\obj\Debug\SpaceExplorer.genruntimeconfig.cache
+C:\Users\tuanv\Projects\SpaceExplorer\.godot\mono\temp\obj\Debug\ref\SpaceExplorer.dll

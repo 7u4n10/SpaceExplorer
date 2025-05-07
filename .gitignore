@@ -4,8 +4,13 @@
 
 # Godot-specific ignores
 .import/
+.vscode/
 export.cfg
 export_credentials.cfg
+*.import
+*.tmp
+.vs/
+*.user
 
 # Imported translations (automatically generated from CSV files)
 *.translation
