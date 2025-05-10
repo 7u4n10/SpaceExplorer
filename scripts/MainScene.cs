@@ -4,10 +4,11 @@ using System.Collections.Generic;
 
 public partial class MainScene : Node3D
 {
-	[Export] public float G = 9.8f;
+	[Export] public float G = 1f; //6.67430e-11f;
 	private List<PlanetBody> _bodies = new();
 
 	// version 1
+	// Spawn a planet and a moon
 	//public override void _Ready()
 	//{
 		//float centerMass = 2000f;
@@ -17,8 +18,9 @@ public partial class MainScene : Node3D
 		//SpawnPlanet(new Vector3(0, 0, 0), new Vector3(0, 0, 0), centerMass); // Central planet
 		//SpawnPlanet(new Vector3(20, 0, 0), new Vector3(0, 0, orbitSpeed), orbitMass); // Orbiting planet
 	//}
-	
+	//
 	// version 1
+	// Spawn planet and moon
 	//private void SpawnPlanet(Vector3 position, Vector3 initialVelocity, float mass)
 	//{
 		//var planetScene = GD.Load<PackedScene>("res://scenes/PlanetBody.tscn");
