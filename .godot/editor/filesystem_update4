@@ -3,3 +3,4 @@ res://scripts/MainCamera.cs
 res://scripts/MainScene.cs
 res://scenes/MainScene.tscn
 res://scripts/PlanetBody.cs
+res://scripts/DebugCamera.cs
