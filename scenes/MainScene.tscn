@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://cv2i3v6ptvt73"]
 
 [ext_resource type="Script" uid="uid://dq4ckw83kpn0p" path="res://scripts/MainScene.cs" id="1_echbf"]
-[ext_resource type="Script" uid="uid://debryqmr8co7i" path="res://scripts/MainCamera.cs" id="2_ibiss"]
+[ext_resource type="Script" uid="uid://badr5o25tiws6" path="res://scripts/DebugCamera.cs" id="2_ibiss"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ibiss"]
 
