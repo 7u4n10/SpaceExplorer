@@ -3,8 +3,8 @@ using System;
 
 public partial class DebugCamera : Camera3D
 {
-	[Export] public float MoveSpeed = 1000f;
-	[Export] public float LookSpeed = 100f;
+	[Export] public float MoveSpeed = 30f;
+	[Export] public float LookSpeed = 0.003f;
 	[Export] public bool IsFreeFly = true;
 	
 	private Vector2 _rotation = Vector2.Zero;
