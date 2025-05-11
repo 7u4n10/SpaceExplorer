@@ -4,3 +4,5 @@ res://scripts/MainScene.cs
 res://scenes/MainScene.tscn
 res://scripts/PlanetBody.cs
 res://scripts/DebugCamera.cs
+res://scenes/ProceduralPlanet.tscn
+res://scripts/CubeSphereGenerator.cs

@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://bdywjjca7xxmy"]
+
+[ext_resource type="Script" uid="uid://h5k2yybtyrgv" path="res://scripts/CubeSphereGenerator.cs" id="1_xv2as"]
+[ext_resource type="Script" uid="uid://badr5o25tiws6" path="res://scripts/DebugCamera.cs" id="2_wbil8"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_wbil8"]
+
+[sub_resource type="Sky" id="Sky_ami1j"]
+sky_material = SubResource("ProceduralSkyMaterial_wbil8")
+
+[sub_resource type="Environment" id="Environment_lsi8r"]
+background_mode = 2
+sky = SubResource("Sky_ami1j")
+
+[node name="ProceduralPlanet" type="Node3D"]
+script = ExtResource("1_xv2as")
+
+[node name="PlanetFace_Up" type="MeshInstance3D" parent="."]
+
+[node name="PlanetFace_Down" type="MeshInstance3D" parent="."]
+
+[node name="PlanetFace_Left" type="MeshInstance3D" parent="."]
+
+[node name="PlanetFace_Right" type="MeshInstance3D" parent="."]
+
+[node name="PlanetFace_Forward" type="MeshInstance3D" parent="."]
+
+[node name="PlanetFace_Back" type="MeshInstance3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 0, 10, 30)
+current = true
+script = ExtResource("2_wbil8")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_lsi8r")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
