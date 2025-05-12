@@ -1,6 +1,4 @@
-res://scenes/PlanetBody.tscn
-res://scripts/MainCamera.cs
-res://scripts/MainScene.cs
 res://scenes/MainScene.tscn
-res://scripts/PlanetBody.cs
 res://scripts/DebugCamera.cs
+res://scripts/PlanetBody.cs
+res://scripts/MainScene.cs
