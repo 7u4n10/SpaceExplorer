@@ -1,8 +1,10 @@
-res://scenes/PlanetBody.tscn
-res://scripts/MainCamera.cs
-res://scripts/MainScene.cs
 res://scenes/MainScene.tscn
-res://scripts/PlanetBody.cs
 res://scripts/DebugCamera.cs
+res://scripts/PlanetBody.cs
+res://scripts/MainScene.cs
 res://scenes/ProceduralPlanet.tscn
+res://scenes/PlanetBody.tscn
 res://scripts/CubeSphereGenerator.cs
+res://scripts/PlanetSystemManager.cs
+res://scripts/PlanetVisual.cs
+res://scenes/PlanetVisual.tscn

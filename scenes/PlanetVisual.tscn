@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://b5ew6cb2w2052"]
+
+[ext_resource type="Script" uid="uid://o8t1228u3p64" path="res://scripts/PlanetVisual.cs" id="1_5bl2x"]
+
+[node name="PlanetVisual" type="Node3D"]
+script = ExtResource("1_5bl2x")
+
+[node name="PlanetFace_Up" type="MeshInstance3D" parent="."]
+skeleton = NodePath("../..")
+
+[node name="PlanetFace_Down" type="MeshInstance3D" parent="."]
+skeleton = NodePath("../..")
+
+[node name="PlanetFace_Left" type="MeshInstance3D" parent="."]
+skeleton = NodePath("../..")
+
+[node name="PlanetFace_Right" type="MeshInstance3D" parent="."]
+skeleton = NodePath("../..")
+
+[node name="PlanetFace_Forward" type="MeshInstance3D" parent="."]
+skeleton = NodePath("../..")
+
+[node name="PlanetFace_Back" type="MeshInstance3D" parent="."]
+skeleton = NodePath("../..")
