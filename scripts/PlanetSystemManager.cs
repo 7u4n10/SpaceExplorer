@@ -8,7 +8,7 @@ public partial class PlanetSystemManager : Node
 
 	private List<PlanetBody> planets = new();
 
-	[Export] public float GravitationalConstant = 0.1f;
+	public static float GravitationalConstant = 0.1f;
 
 	public override void _Ready()
 	{
@@ -36,12 +36,14 @@ public partial class PlanetSystemManager : Node
 
 			for (int j = 0; j < planets.Count; j++)
 			{
-				if (i == j) continue;
+				if (i == j) 
+					continue;
 
 				PlanetBody b = planets[j];
 				Vector3 direction = b.GlobalPosition - a.GlobalPosition;
 				float distance = direction.Length();
-				if (distance < 1f) continue;
+				if (distance < 1f) 
+					continue;
 
 				float forceMagnitude = GravitationalConstant * a.Mass * b.Mass / (distance * distance);
 				Vector3 force = direction.Normalized() * forceMagnitude;

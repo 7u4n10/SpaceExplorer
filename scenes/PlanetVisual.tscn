@@ -1,24 +1,92 @@
-[gd_scene load_steps=2 format=3 uid="uid://b5ew6cb2w2052"]
+[gd_scene load_steps=3 format=3 uid="uid://b5ew6cb2w2052"]
 
 [ext_resource type="Script" uid="uid://o8t1228u3p64" path="res://scripts/PlanetVisual.cs" id="1_5bl2x"]
+[ext_resource type="PackedScene" uid="uid://dii2v1fjuwx58" path="res://scenes/QuadtreePatch.tscn" id="2_pj1ga"]
 
 [node name="PlanetVisual" type="Node3D"]
 script = ExtResource("1_5bl2x")
+QuadtreePatchScene = ExtResource("2_pj1ga")
 
-[node name="PlanetFace_Up" type="MeshInstance3D" parent="."]
-skeleton = NodePath("../..")
+[node name="PlanetFace_Up" type="Node3D" parent="."]
 
-[node name="PlanetFace_Down" type="MeshInstance3D" parent="."]
-skeleton = NodePath("../..")
+[node name="Patch_0_0" parent="PlanetFace_Up" instance=ExtResource("2_pj1ga")]
+QuadtreePatchScene = ExtResource("2_pj1ga")
 
-[node name="PlanetFace_Left" type="MeshInstance3D" parent="."]
-skeleton = NodePath("../..")
+[node name="Patch_0_1" parent="PlanetFace_Up" instance=ExtResource("2_pj1ga")]
+QuadtreePatchScene = ExtResource("2_pj1ga")
 
-[node name="PlanetFace_Right" type="MeshInstance3D" parent="."]
-skeleton = NodePath("../..")
+[node name="Patch_1_0" parent="PlanetFace_Up" instance=ExtResource("2_pj1ga")]
+QuadtreePatchScene = ExtResource("2_pj1ga")
 
-[node name="PlanetFace_Forward" type="MeshInstance3D" parent="."]
-skeleton = NodePath("../..")
+[node name="Patch_1_1" parent="PlanetFace_Up" instance=ExtResource("2_pj1ga")]
+QuadtreePatchScene = ExtResource("2_pj1ga")
 
-[node name="PlanetFace_Back" type="MeshInstance3D" parent="."]
-skeleton = NodePath("../..")
+[node name="PlanetFace_Down" type="Node3D" parent="."]
+
+[node name="Patch_0_0" parent="PlanetFace_Down" instance=ExtResource("2_pj1ga")]
+QuadtreePatchScene = ExtResource("2_pj1ga")
+
+[node name="Patch_0_1" parent="PlanetFace_Down" instance=ExtResource("2_pj1ga")]
+QuadtreePatchScene = ExtResource("2_pj1ga")
+
+[node name="Patch_1_0" parent="PlanetFace_Down" instance=ExtResource("2_pj1ga")]
+QuadtreePatchScene = ExtResource("2_pj1ga")
+
+[node name="Patch_1_1" parent="PlanetFace_Down" instance=ExtResource("2_pj1ga")]
+QuadtreePatchScene = ExtResource("2_pj1ga")
+
+[node name="PlanetFace_Left" type="Node3D" parent="."]
+
+[node name="Patch_0_0" parent="PlanetFace_Left" instance=ExtResource("2_pj1ga")]
+QuadtreePatchScene = ExtResource("2_pj1ga")
+
+[node name="Patch_0_1" parent="PlanetFace_Left" instance=ExtResource("2_pj1ga")]
+QuadtreePatchScene = ExtResource("2_pj1ga")
+
+[node name="Patch_1_0" parent="PlanetFace_Left" instance=ExtResource("2_pj1ga")]
+QuadtreePatchScene = ExtResource("2_pj1ga")
+
+[node name="Patch_1_1" parent="PlanetFace_Left" instance=ExtResource("2_pj1ga")]
+QuadtreePatchScene = ExtResource("2_pj1ga")
+
+[node name="PlanetFace_Right" type="Node3D" parent="."]
+
+[node name="Patch_0_0" parent="PlanetFace_Right" instance=ExtResource("2_pj1ga")]
+QuadtreePatchScene = ExtResource("2_pj1ga")
+
+[node name="Patch_0_1" parent="PlanetFace_Right" instance=ExtResource("2_pj1ga")]
+QuadtreePatchScene = ExtResource("2_pj1ga")
+
+[node name="Patch_1_0" parent="PlanetFace_Right" instance=ExtResource("2_pj1ga")]
+QuadtreePatchScene = ExtResource("2_pj1ga")
+
+[node name="Patch_1_1" parent="PlanetFace_Right" instance=ExtResource("2_pj1ga")]
+QuadtreePatchScene = ExtResource("2_pj1ga")
+
+[node name="PlanetFace_Forward" type="Node3D" parent="."]
+
+[node name="Patch_0_0" parent="PlanetFace_Forward" instance=ExtResource("2_pj1ga")]
+QuadtreePatchScene = ExtResource("2_pj1ga")
+
+[node name="Patch_0_1" parent="PlanetFace_Forward" instance=ExtResource("2_pj1ga")]
+QuadtreePatchScene = ExtResource("2_pj1ga")
+
+[node name="Patch_1_0" parent="PlanetFace_Forward" instance=ExtResource("2_pj1ga")]
+QuadtreePatchScene = ExtResource("2_pj1ga")
+
+[node name="Patch_1_1" parent="PlanetFace_Forward" instance=ExtResource("2_pj1ga")]
+QuadtreePatchScene = ExtResource("2_pj1ga")
+
+[node name="PlanetFace_Back" type="Node3D" parent="."]
+
+[node name="Patch_0_0" parent="PlanetFace_Back" instance=ExtResource("2_pj1ga")]
+QuadtreePatchScene = ExtResource("2_pj1ga")
+
+[node name="Patch_0_1" parent="PlanetFace_Back" instance=ExtResource("2_pj1ga")]
+QuadtreePatchScene = ExtResource("2_pj1ga")
+
+[node name="Patch_1_0" parent="PlanetFace_Back" instance=ExtResource("2_pj1ga")]
+QuadtreePatchScene = ExtResource("2_pj1ga")
+
+[node name="Patch_1_1" parent="PlanetFace_Back" instance=ExtResource("2_pj1ga")]
+QuadtreePatchScene = ExtResource("2_pj1ga")

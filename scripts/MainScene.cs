@@ -1,3 +1,81 @@
+using Godot;
+using System;
+
+public partial class MainScene : Node3D
+{
+	[Export] public PackedScene PlanetScene;
+	
+	// version 4
+	public override void _Ready()
+	{
+		// Planet A (central massive body)
+		var center = PlanetScene.Instantiate<PlanetBody>();
+		center.GlobalPosition = Vector3.Zero;
+		center.Mass = 5000f;
+		center.Radius = Mathf.Pow(center.Mass, 1f / 3f);
+		AddChild(center);
+		
+		center.Velocity = Vector3.Zero;
+
+		// DEBUG
+		GD.Print($"[MainScene] {center.Name} added at {center.GlobalPosition}");
+
+		// Planet B (orbiting)
+		var orbiter = PlanetScene.Instantiate<PlanetBody>();
+
+		float orbitDistance = 50f;
+		orbiter.GlobalPosition = new Vector3(orbitDistance, 0, 0);
+		orbiter.Mass = 1000f;
+		orbiter.Radius = Mathf.Pow(orbiter.Mass, 1f / 3f);
+		AddChild(orbiter);
+
+		// Calculate orbital velocity
+		float G = PlanetSystemManager.GravitationalConstant;
+		float orbitalSpeed = Mathf.Sqrt(G * center.Mass / orbitDistance);
+		orbiter.Velocity = new Vector3(0, 0, orbitalSpeed); 
+		
+		// DEBUG
+		GD.Print($"[MainScene] {orbiter.Name} added at {orbiter.GlobalPosition}");
+	}
+	
+ // version 3
+ // Commented out for demo purposed
+	//public override void _Ready()
+	//{
+		//for (int i = 0; i < InitialPlanetCount; i++)
+		//{
+			//SpawnPlanet();
+		//}
+	//}
+//
+	//private void SpawnPlanet()
+	//{
+		//if (PlanetScene == null)
+		//{
+			//GD.PrintErr("PlanetScene not assigned in MainScene.");
+			//return;
+		//}
+//
+		//var planet = PlanetScene.Instantiate<PlanetBody>();
+		//AddChild(planet);
+//
+		//// Random position within a ring
+		//float angle = GD.Randf() * Mathf.Tau;
+		//float distance = GD.Randf() * SpawnRadius + 10f;
+		//Vector3 position = new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)) * distance;
+		//planet.GlobalPosition = position;
+//
+		//// Initial velocity (perpendicular to position)
+		//Vector3 velocity = new Vector3(-Mathf.Sin(angle), 0, Mathf.Cos(angle)) * 5f;
+		//planet.Velocity = velocity;
+//
+		//// slightly randomize size or mass
+		//planet.Mass = Mathf.Lerp(500f, 1500f, GD.Randf());
+		//planet.Radius = Mathf.Pow(planet.Mass, 1f / 3f);
+	//}
+}
+
+
 // version 2
 //using Godot;
 //using System;
@@ -127,77 +205,3 @@
 		//camera.LookAt(planet.GlobalPosition, Vector3.Up);
 	//}
 //}
-
-
-
-using Godot;
-using System;
-//
-public partial class MainScene : Node3D
-{
-	[Export] public float G = 1f; //6.67430e-11f;
-	[Export] public PackedScene PlanetScene;
-	[Export] public int InitialPlanetCount = 2;
-	[Export] public float SpawnRadius = 30f;
-	
- // version 3
- // Commented out for demo purposed
-	//public override void _Ready()
-	//{
-		//for (int i = 0; i < InitialPlanetCount; i++)
-		//{
-			//SpawnPlanet();
-		//}
-	//}
-//
-	//private void SpawnPlanet()
-	//{
-		//if (PlanetScene == null)
-		//{
-			//GD.PrintErr("PlanetScene not assigned in MainScene.");
-			//return;
-		//}
-//
-		//var planet = PlanetScene.Instantiate<PlanetBody>();
-		//AddChild(planet);
-//
-		//// Random position within a ring
-		//float angle = GD.Randf() * Mathf.Tau;
-		//float distance = GD.Randf() * SpawnRadius + 10f;
-		//Vector3 position = new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)) * distance;
-		//planet.GlobalPosition = position;
-//
-		//// Initial velocity (perpendicular to position)
-		//Vector3 velocity = new Vector3(-Mathf.Sin(angle), 0, Mathf.Cos(angle)) * 5f;
-		//planet.Velocity = velocity;
-//
-		//// slightly randomize size or mass
-		//planet.Mass = Mathf.Lerp(500f, 1500f, GD.Randf());
-		//planet.Radius = Mathf.Pow(planet.Mass, 1f / 3f);
-	//}
-	
-	public override void _Ready()
-	{
-		// Planet A (central massive body)
-		var center = PlanetScene.Instantiate<PlanetBody>();
-		AddChild(center);
-		center.GlobalPosition = Vector3.Zero;
-		center.Mass = 5000f;
-		center.Radius = Mathf.Pow(center.Mass, 1f / 3f);
-		center.Velocity = Vector3.Zero;
-
-		// Planet B (orbiting)
-		var orbiter = PlanetScene.Instantiate<PlanetBody>();
-		AddChild(orbiter);
-
-		float orbitDistance = 20f;
-		orbiter.GlobalPosition = new Vector3(orbitDistance, 0, 0);
-		orbiter.Mass = 1000f;
-		orbiter.Radius = Mathf.Pow(orbiter.Mass, 1f / 3f);
-
-		// Calculate orbital velocity
-		float G = PlanetSystemManager.Instance.GravitationalConstant;
-		float orbitalSpeed = Mathf.Sqrt(G * center.Mass / orbitDistance);
-		orbiter.Velocity = new Vector3(0, 0, orbitalSpeed); 
-	}
-}

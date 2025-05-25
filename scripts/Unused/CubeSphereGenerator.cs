@@ -2,6 +2,8 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
+// Deprecated
+// Move onto PlanetVisual
 public partial class CubeSphereGenerator : Node3D
 {
 	[Export] public int Resolution = 32;

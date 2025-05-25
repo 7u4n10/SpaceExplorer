@@ -1,56 +1,46 @@
-//using Godot;
-//using System;
-//
-//public partial class PlanetBody : RigidBody3D
-//{
-	//[Export] public new float Mass = 100f;
-	//[Export] public Vector3 Velocity = Vector3.Zero;
-//
-	//public override void _IntegrateForces(PhysicsDirectBodyState3D state)
-	//{
-		//state.LinearVelocity = Velocity;
-	//}
-//
-	//public void ApplyGravity(Vector3 force)
-	//{
-		//Velocity += force * (float)GetPhysicsProcessDeltaTime();
-	//}
-//
-	//public void SetColor(Color color)
-	//{
-		//var material = new StandardMaterial3D();
-		//material.AlbedoColor = color;
-		//MeshInstance3D visual = GetNode<MeshInstance3D>("Visual");
-		//visual.SetSurfaceOverrideMaterial(0, material);
-	//}
-	//
-	//public override void _InputEvent(Camera3D camera, InputEvent @event, Vector3 position, Vector3 normal, int shapeIdx)
-	//{
-		//if (@event is InputEventMouseButton mouseEvent && mouseEvent.Pressed && mouseEvent.ButtonIndex == MouseButton.Left)
-		//{
-			//GD.Print(Name + " was clicked.");
-			//EmitSignal("PlanetClicked", this);
-		//}
-	//}
-//
-//}
-
-
 using Godot;
 using System;
 
 public partial class PlanetBody : Node3D
 {
-	[Export] public float Mass = 1000f;
-	[Export] public float Radius = 10f;
+	[Export] public float Mass = 15000;
+	[Export] public float Radius = 25;
 	[Export] public Vector3 Velocity = Vector3.Zero;
 
 	private PlanetVisual _visual;
 
 	public override void _Ready()
 	{
-		_visual = GetNode<PlanetVisual>("PlanetVisual");
-		_visual.GenerateSurface(Radius);
+		// DEBUG
+		GD.Print("[PlanetBody] Calling PlanetSystemManager");
+
+		PlanetSystemManager.Instance?.AddPlanet(this);
+		
+		// DEBUG
+		GD.Print("[PlanetBody] Calling PlanetVisual().GenerateSurface");
+
+		try {
+			_visual = GetNodeOrNull<PlanetVisual>("PlanetVisual");
+			if (_visual == null)
+			{
+				GD.PrintErr("[PlanetBody] ERROR: PlanetVisual not found!");
+				return;
+			}
+
+			_visual.GenerateSurface(Radius);
+		} catch (Exception e) {
+			GD.PrintErr($"[PlanetBody] CRASHED: {e.Message}");
+		}
+		
+		// DEBUG
+		GD.Print($"[PlanetBody] is ready with Radius {Radius}, Mass {Mass}");
+	}
+	
+	public override void _ExitTree()
+	{
+		// DEBUG
+		GD.Print("[PlanetBody/_ExitTree()] ...");
+		PlanetSystemManager.Instance?.RemovePlanet(this);
 	}
 
 	public void ApplyForce(Vector3 force, float delta)

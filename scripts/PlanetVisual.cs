@@ -4,39 +4,41 @@ using System;
 public partial class PlanetVisual : Node3D
 {
 	[Export] public int Resolution = 32;
-	[Export] public float Radius = 10f;
 	[Export] public float ElevationAmplitude = 2f;
-	[Export] public float NoiseFrequency = 1f;
-	[Export] public int NoiseSeed = 1337;
-	[Export] public FastNoiseLite.NoiseTypeEnum NoiseType = FastNoiseLite.NoiseTypeEnum.Perlin;
+	[Export] public PackedScene QuadtreePatchScene;
 
-	private FastNoiseLite noise;
+	private float Radius = 10f;
+	private TerrainNoiseProfile terrainProfile;
+	private IPatchMeshGenerator meshGenerator = new DefaultPatchGenerator();
 
 	public override void _Ready()
 	{
+		// DEBUG
+		GD.Print("[PlanetVisual] _Ready() called");
+
+		terrainProfile = TerrainProfiles.Rocky;
+		terrainProfile.Initialize();
+		
 		GenerateSurface(Radius);
+		
+		// DEBUG
+		GD.Print($"[PlanetVisual] is ready");
 	}
 
 	public void GenerateSurface(float radius)
 	{
 		Radius = radius;
-		noise = new FastNoiseLite
+		
+		foreach (var faceNode in GetChildren())
 		{
-			Seed = NoiseSeed,
-			Frequency = NoiseFrequency,
-			NoiseType = NoiseType
-		};
-
-		foreach (var child in GetChildren())
-		{
-			if (child is MeshInstance3D faceMesh)
+			if (faceNode is Node3D face)
 			{
-				GenerateFaceMesh(faceMesh, faceMesh.Name, radius);
+				GeneratePatchesForFace(face.Name, face);
 			}
 		}
 	}
-
-	private void GenerateFaceMesh(MeshInstance3D meshInstance, string faceName, float radius)
+	
+	private void GeneratePatchesForFace(string faceName, Node3D parent)
 	{
 		Vector3 localUp = faceName switch
 		{
@@ -49,53 +51,53 @@ public partial class PlanetVisual : Node3D
 			_ => Vector3.Up
 		};
 
-		var st = new SurfaceTool();
-		st.Begin(Mesh.PrimitiveType.Triangles);
-
 		Vector3 axisA = new Vector3(localUp.Y, localUp.Z, localUp.X);
 		Vector3 axisB = localUp.Cross(axisA);
 
-		for (int y = 0; y < Resolution; y++)
+		parent.CallDeferred("clear");
+
+		int patchCount = 2;
+		for (int py = 0; py < patchCount; py++)
 		{
-			for (int x = 0; x < Resolution; x++)
+			for (int px = 0; px < patchCount; px++)
 			{
-				Vector2 percent = new Vector2(x, y) / (Resolution - 1);
-				Vector3 pointOnUnitCube =
-					localUp +
-					(percent.X - 0.5f) * 2f * axisA +
-					(percent.Y - 0.5f) * 2f * axisB;
+				// DEBUG
+				if (QuadtreePatchScene == null)
+				{
+					GD.PrintErr("[PlanetVisual] ERROR: QuadtreePatchScene is null!");
+					return;
+				} else  {
+					
+				}
 
-				Vector3 pointOnUnitSphere = pointOnUnitCube.Normalized();
-				float elevation = noise.GetNoise3D(
-					pointOnUnitSphere.X,
-					pointOnUnitSphere.Y,
-					pointOnUnitSphere.Z
-				) * ElevationAmplitude;
+				string patchName = $"Patch_{px}_{py}";
+				float patchScale = 1f / patchCount;
+				Vector2 offset = new Vector2(px, py) * patchScale;
+				
+				var patchNode = QuadtreePatchScene.Instantiate<QuadtreePatch>();
 
-				Vector3 finalVertex = pointOnUnitSphere * (radius + elevation);
+				patchNode.Name = patchName;
+				patchNode.MeshGenerator = meshGenerator;
+				patchNode.TerrainProfile = terrainProfile;
+				patchNode.Radius = Radius;
+				patchNode.LocalUp = localUp;
+				patchNode.AxisA = axisA;
+				patchNode.AxisB = axisB;
+				patchNode.PatchOffset = offset;
+				patchNode.PatchScale = patchScale;
+				patchNode.LODResolutions = new[] { 8, 16, 32, 64 };
+				patchNode.LodDistanceThresholds = new[] { 200f, 100f, 50f, 25f };
+				patchNode.CurrentDepth = 0;
+				patchNode.MaxDepth = 5;
+				patchNode.QuadtreePatchScene = QuadtreePatchScene;
 
-				st.SetNormal(pointOnUnitSphere);
-				st.AddVertex(finalVertex);
+				// DEBUG
+				GD.Print($"[PlanetVisual] Instantiating patch {patchName} for face {faceName}");
+				GD.Print($"[PlanetVisual] Assigned profile to patch {patchName}? {patchNode.TerrainProfile != null}");
+
+				patchNode.Initialize(); 
+				parent.AddChild(patchNode);
 			}
 		}
-
-		for (int y = 0; y < Resolution - 1; y++)
-		{
-			for (int x = 0; x < Resolution - 1; x++)
-			{
-				int i = x + y * Resolution;
-
-				st.AddIndex(i);
-				st.AddIndex(i + Resolution);
-				st.AddIndex(i + Resolution + 1);
-
-				st.AddIndex(i);
-				st.AddIndex(i + Resolution + 1);
-				st.AddIndex(i + 1);
-			}
-		}
-
-		var arrayMesh = st.Commit();
-		meshInstance.Mesh = arrayMesh;
 	}
 }
