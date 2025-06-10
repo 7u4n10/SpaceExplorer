@@ -105,11 +105,10 @@ public partial class QuadtreePatch : Node3D
 		
 		if (children == null && lodIndex != currentLODIndex)
 		{
-				GD.Print($"[QuadtreePatch] Generating mesh at LOD index {lodIndex}");
-				GD.Print(LODResolutions);
+				//GD.Print($"[QuadtreePatch] Generating mesh at LOD index {lodIndex}");
 				var  resolution = LODResolutions[lodIndex];
-				GD.Print($"[QuadtreePatch] Generating mesh at LOD {resolution}");
-				GD.Print($"[QuadtreePatch] MeshGenerator is set? {MeshGenerator != null}");
+				//GD.Print($"[QuadtreePatch] Generating mesh at LOD {resolution}");
+				//GD.Print($"[QuadtreePatch] MeshGenerator is set? {MeshGenerator != null}");
 
 				var mesh = MeshGenerator.GeneratePatchMesh(
 					LocalUp,

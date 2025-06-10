@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://cv2i3v6ptvt73"]
+[gd_scene load_steps=10 format=3 uid="uid://cv2i3v6ptvt73"]
 
 [ext_resource type="Script" uid="uid://dq4ckw83kpn0p" path="res://scripts/MainScene.cs" id="1_echbf"]
 [ext_resource type="PackedScene" uid="uid://w30amyv4oxhn" path="res://scenes/PlanetBody.tscn" id="2_611at"]
 [ext_resource type="Script" uid="uid://badr5o25tiws6" path="res://scripts/DebugCamera.cs" id="2_ibiss"]
 [ext_resource type="Shader" uid="uid://djpc4key7lu0n" path="res://shaders/SpaceSky.gdshader" id="3_611at"]
 [ext_resource type="Texture2D" uid="uid://bltqqw1ici2mj" path="res://textures/panorama_image.png" id="4_k24pf"]
+[ext_resource type="Script" uid="uid://bt1jfhikapw34" path="res://scripts/MusicPlayer.cs" id="6_ygjfp"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_k24pf"]
 shader = ExtResource("3_611at")
@@ -35,3 +36,6 @@ transform = Transform3D(-0.707106, 0, 0.707106, 0, 1, 0, -0.707106, 0, -0.707106
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 100)
 current = true
 script = ExtResource("2_ibiss")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+script = ExtResource("6_ygjfp")
