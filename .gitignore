@@ -4,18 +4,23 @@
 
 # Godot-specific ignores
 .import/
-.vscode/
 export.cfg
 export_credentials.cfg
 *.import
 *.tmp
-.vs/
-*.user
 
 # Imported translations (automatically generated from CSV files)
 *.translation
 
 # Mono-specific ignores
 .mono/
+bin/
+obj/
 data_*/
 mono_crash.*.json
+
+# IDE / Editor specific
+.vscode/
+.vs/
+*.csproj.user
+*.user
