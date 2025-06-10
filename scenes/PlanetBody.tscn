@@ -37,6 +37,7 @@ mesh = SubResource("SphereMesh_yyvrs")
 script = ExtResource("2_0epk8")
 PlanetBody = NodePath("..")
 
-[node name="OceanShell" type="MeshInstance3D" parent="."]
+[node name="OceanShell" type="MeshInstance3D" parent="." node_paths=PackedStringArray("PlanetBody")]
 mesh = SubResource("SphereMesh_1y6qw")
 script = ExtResource("5_t0ono")
+PlanetBody = NodePath("..")

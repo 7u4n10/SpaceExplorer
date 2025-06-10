@@ -11,6 +11,7 @@ public partial class DebugCamera : Camera3D
 	public override void _Ready()
 	{
 		Input.MouseMode = Input.MouseModeEnum.Captured;
+		ProcessMode = ProcessModeEnum.Always;
 	}
 
 	public override void _Input(InputEvent @event)
