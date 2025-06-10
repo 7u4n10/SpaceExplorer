@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://w30amyv4oxhn"]
+[gd_scene load_steps=10 format=3 uid="uid://w30amyv4oxhn"]
 
 [ext_resource type="Script" uid="uid://bljcmlvas6tf8" path="res://scripts/PlanetBody.cs" id="1_yyvrs"]
 [ext_resource type="Script" uid="uid://58iq46tgsnj1" path="res://scripts/AtmosphereShell.cs" id="2_0epk8"]
 [ext_resource type="Shader" uid="uid://bns6dei8brjjd" path="res://shaders/AtmosphereShader.gdshader" id="2_dl58j"]
+[ext_resource type="Shader" uid="uid://66up5s8td6ij" path="res://shaders/OceanShader.gdshader" id="4_4pd5e"]
+[ext_resource type="Script" uid="uid://cd5argpthdrw2" path="res://scripts/OceanShell.cs" id="5_t0ono"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4pd5e"]
 render_priority = 0
@@ -15,8 +17,17 @@ shader_parameter/fade_end = 1.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_yyvrs"]
 material = SubResource("ShaderMaterial_4pd5e")
-radius = 45.0
-height = 90.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t0ono"]
+render_priority = 0
+shader = ExtResource("4_4pd5e")
+shader_parameter/ocean_color = Color(0, 0.2, 0.5, 1)
+shader_parameter/wave_strength = 0.05
+shader_parameter/time_scale = 0.5
+shader_parameter/noise_scale = 2.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_1y6qw"]
+material = SubResource("ShaderMaterial_t0ono")
 
 [node name="PlanetBody" type="Node3D"]
 script = ExtResource("1_yyvrs")
@@ -25,3 +36,7 @@ script = ExtResource("1_yyvrs")
 mesh = SubResource("SphereMesh_yyvrs")
 script = ExtResource("2_0epk8")
 PlanetBody = NodePath("..")
+
+[node name="OceanShell" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_1y6qw")
+script = ExtResource("5_t0ono")

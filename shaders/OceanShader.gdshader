@@ -1,21 +1,23 @@
 shader_type spatial;
 
-uniform float wave_speed = 1.0;
-uniform float wave_strength = 0.05;
-uniform float wave_scale = 2.0;
-uniform vec4 ocean_color : source_color = vec4(0.0, 0.2, 0.5, 1.0);
+render_mode blend_mix, depth_draw_opaque, cull_back, unshaded;
+
+uniform vec4 ocean_color : source_color = vec4(0.0, 0.3, 0.6, 0.8);
+uniform float wave_strength = 0.1;
+uniform float time_scale = 0.5;
+uniform float noise_scale = 2.0;
 
 void vertex() {
 	// Called for every vertex the material is visible on.
 }
 
 void fragment() {
-	// Called for every pixel the material is visible on.
-	float wave = sin(UV.x * wave_scale + TIME * wave_speed) * wave_strength;
-	wave += cos(UV.y * wave_scale * 1.5 + TIME * wave_speed * 0.8) * wave_strength * 0.5;
-	ALBEDO = ocean_color.rgb + vec3(wave);
-	METALLIC = 0.3;
-	ROUGHNESS = 0.1;
+    float t = TIME * time_scale;
+    vec3 noise_pos = NORMAL * noise_scale + vec3(t, t, t);
+    float wave = sin(noise_pos.x + noise_pos.y + noise_pos.z) * wave_strength;
+    
+    ALBEDO = ocean_color.rgb + wave * 0.2;
+    ALPHA = ocean_color.a;
 }
 
 

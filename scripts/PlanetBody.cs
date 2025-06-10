@@ -4,16 +4,23 @@ using System;
 public partial class PlanetBody : Node3D
 {
 	[Export] public float Mass = 15000;
-	[Export] public float Radius = 25;
 	[Export] public Vector3 Velocity = Vector3.Zero;
+	[Export] public float Radius = 25;
 
 	private PlanetVisual _visual;
 
 	public override void _Ready()
 	{
+		// Add atmosphere
+		var atmosphere = GetNode<AtmosphereShell>("AtmosphereShell");
+		atmosphere.SetPlanetRadius(Radius);
+		
+		// Add ocean
+		var ocean = GetNode<OceanShell>("OceanShell");
+		ocean.SetPlanetRadius(Radius);
+		
 		// DEBUG
 		//GD.Print("[PlanetBody] Calling PlanetSystemManager");
-
 		PlanetSystemManager.Instance?.AddPlanet(this);
 		
 		// DEBUG

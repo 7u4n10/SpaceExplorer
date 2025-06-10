@@ -4,18 +4,21 @@ using System;
 public partial class AtmosphereShell : MeshInstance3D
 {
 	[Export] public Node3D PlanetBody;
-	[Export] public float ScaleFactor = 1.025f;
+	[Export] public float ScaleFactor = 2.5f;
 	[Export] public DirectionalLight3D SunLight;
+	private float _planetRadius = 100f;
 	
+	public override void _Ready()
+	{
+		ProcessMode = ProcessModeEnum.Always;
+		ApplyScale();
+	}
+
 	public override void _Process(double delta)
 	{
 		if (PlanetBody != null)
 		{
-			GlobalPosition = PlanetBody.GlobalPosition;
-
-			// Match terrain radius and scale
-			float terrainRadius = PlanetBody.Scale.X;
-			Scale = new Vector3(terrainRadius, terrainRadius, terrainRadius) * ScaleFactor;
+			ApplyScale();
 		}
 		
 		if (SunLight != null)
@@ -25,5 +28,17 @@ public partial class AtmosphereShell : MeshInstance3D
 			var material = (ShaderMaterial)Mesh.SurfaceGetMaterial(0);
 			material.SetShaderParameter("light_dir", lightDir);
 		}
+	}
+	
+	public void SetPlanetRadius(float radius)
+	{
+		_planetRadius = radius;
+		ApplyScale();
+	}
+	
+	private void ApplyScale()
+	{
+		float atmosphereRadius = _planetRadius * ScaleFactor;
+		Scale = new Vector3(atmosphereRadius, atmosphereRadius, atmosphereRadius);
 	}
 }
