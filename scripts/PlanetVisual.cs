@@ -14,7 +14,7 @@ public partial class PlanetVisual : Node3D
 	public override void _Ready()
 	{
 		// DEBUG
-		GD.Print("[PlanetVisual] _Ready() called");
+		//GD.Print("[PlanetVisual] _Ready() called");
 
 		terrainProfile = TerrainProfiles.Rocky;
 		terrainProfile.Initialize();
@@ -22,7 +22,7 @@ public partial class PlanetVisual : Node3D
 		GenerateSurface(Radius);
 		
 		// DEBUG
-		GD.Print($"[PlanetVisual] is ready");
+		//GD.Print($"[PlanetVisual] is ready");
 	}
 
 	public void GenerateSurface(float radius)
@@ -85,13 +85,13 @@ public partial class PlanetVisual : Node3D
 				patchNode.AxisB = axisB;
 				patchNode.PatchOffset = offset;
 				patchNode.PatchScale = patchScale;
-				patchNode.CurrentDepth = 0;
+				//patchNode.CurrentDepth = 0;
 				patchNode.MaxDepth = 5;
 				patchNode.QuadtreePatchScene = QuadtreePatchScene;
 
 				// DEBUG
-				GD.Print($"[PlanetVisual] Instantiating patch {patchName} for face {faceName}");
-				GD.Print($"[PlanetVisual] Assigned profile to patch {patchName}? {patchNode.TerrainProfile != null}");
+				//GD.Print($"[PlanetVisual] Instantiating patch {patchName} for face {faceName}");
+				//GD.Print($"[PlanetVisual] Assigned profile to patch {patchName}? {patchNode.TerrainProfile != null}");
 
 				patchNode.Initialize(); 
 				parent.AddChild(patchNode);

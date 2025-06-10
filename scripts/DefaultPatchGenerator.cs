@@ -2,7 +2,7 @@ using Godot;
 
 public class DefaultPatchGenerator : IPatchMeshGenerator
 {
-	// version 2
+	// version 3
 	public ArrayMesh GeneratePatchMesh(
 		Vector3 localUp,
 		Vector3 axisA,
@@ -85,27 +85,28 @@ public class DefaultPatchGenerator : IPatchMeshGenerator
 
 		return mesh;
 	}
-
-	private float GetFractalElevation(Vector3 point, FastNoiseLite noise)
-	{
-		float elevation = 0f;
-		float frequency = 1f;
-		float amplitude = 1f;
-
-		for (int i = 0; i < 4; i++)
-		{
-			elevation += noise.GetNoise3D(
-				point.X * frequency,
-				point.Y * frequency,
-				point.Z * frequency
-			) * amplitude;
-
-			amplitude *= 0.5f;
-			frequency *= 2f;
-		}
-
-		return elevation;
-	}
+	
+	// version 2
+	//private float GetFractalElevation(Vector3 point, FastNoiseLite noise)
+	//{
+		//float elevation = 0f;
+		//float frequency = 1f;
+		//float amplitude = 1f;
+//
+		//for (int i = 0; i < 4; i++)
+		//{
+			//elevation += noise.GetNoise3D(
+				//point.X * frequency,
+				//point.Y * frequency,
+				//point.Z * frequency
+			//) * amplitude;
+//
+			//amplitude *= 0.5f;
+			//frequency *= 2f;
+		//}
+//
+		//return elevation;
+	//}
 	
 	// version 1
 	//public ArrayMesh GeneratePatchMesh(

@@ -8,7 +8,7 @@ public partial class QuadtreePatch : Node3D
 	public TerrainNoiseProfile TerrainProfile;
 
 	[Export] public int MaxDepth = 5;
-	[Export] public int CurrentDepth = 0;
+	//[Export] public int CurrentDepth = 0;
 	[Export] public int[] LODResolutions = new int[] { 8, 16, 32, 64, 128 };
 	[Export] public float[] LodDistanceThresholds = new float[] { 400f, 200f, 100f, 50f, 25f };
 
@@ -122,17 +122,21 @@ public partial class QuadtreePatch : Node3D
 					LODResolutions[lodIndex]
 				);
 				
+				// Create new terrain shader
 				var material = new ShaderMaterial();
 				material.Shader = GD.Load<Shader>("res://Shaders/TerrainColorShader.gdshader"); // Adjust path as needed
 
-				// Set shader uniform
+				// Set terrain shader parameters
 				material.SetShaderParameter("max_height", Radius);
+				//material.SetShaderParameter("planet_center", GlobalTransform.origin);
 
 				// Apply the material to the mesh
 				mesh.SurfaceSetMaterial(0, material);
 
+				// Get LOD
 				currentLODIndex = lodIndex;
 				
+				// Set Mesh
 				var meshInstance = GetNode<MeshInstance3D>("MeshInstance3D");
 				meshInstance.Mesh = mesh;
 				
@@ -142,13 +146,9 @@ public partial class QuadtreePatch : Node3D
 				//var aabb = mesh.GetAabb();
 				//GD.Print($"[Quadtree] Mesh AABB: {aabb.Position}, {aabb.Size}");
 				
-				// Add materials
-				//var mat = new StandardMaterial3D();
-				//mat.AlbedoColor = new Color(0.4f, 0.9f, 0.6f); 
-				//mesh.SurfaceSetMaterial(0, mat);
 			try
 			{				
-				// Add collision
+				// Add collision (attempt)
 				var collision = GetNode<CollisionShape3D>("RigidBody3D/CollisionShape3D");
 				var shape = new ConcavePolygonShape3D();
 				shape.Data = mesh.GetFaces();
@@ -194,7 +194,7 @@ public partial class QuadtreePatch : Node3D
 				child.Radius = this.Radius;
 				child.MeshGenerator = this.MeshGenerator;
 				child.TerrainProfile = this.TerrainProfile;
-				child.CurrentDepth = this.CurrentDepth + 1;
+				//child.CurrentDepth = this.CurrentDepth + 1;
 				child.MaxDepth = this.MaxDepth;
 				child.LODResolutions = this.LODResolutions;
 				child.LodDistanceThresholds = this.LodDistanceThresholds;

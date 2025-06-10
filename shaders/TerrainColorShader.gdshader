@@ -1,14 +1,16 @@
 shader_type spatial;
 
-uniform float max_height = 25.0;
+uniform float max_height;
+uniform vec3 planet_center;
 
 void vertex() {
 	// Called for every vertex the material is visible on.
 }
 
 void fragment() {
-    // Normalize the height from 0.0 to 1.0 using the Y position
-    float height_ratio = clamp(VERTEX.y / max_height, 0.0, 1.0);
+    // Normalize the height from 0.0 to 1.0
+    //float height_ratio = clamp(VERTEX.y / max_height, 0.0, 1.0);
+	float height_ratio = clamp(length(VERTEX - planet_center) / max_height, 0.0, 1.0);
 
     // Blend between green (low) and white (high)
 	vec3 low = vec3(0.2, 0.6, 0.2);  // Grass

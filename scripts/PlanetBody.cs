@@ -12,12 +12,12 @@ public partial class PlanetBody : Node3D
 	public override void _Ready()
 	{
 		// DEBUG
-		GD.Print("[PlanetBody] Calling PlanetSystemManager");
+		//GD.Print("[PlanetBody] Calling PlanetSystemManager");
 
 		PlanetSystemManager.Instance?.AddPlanet(this);
 		
 		// DEBUG
-		GD.Print("[PlanetBody] Calling PlanetVisual().GenerateSurface");
+		//GD.Print("[PlanetBody] Calling PlanetVisual().GenerateSurface");
 
 		try {
 			var visScene = GD.Load("res://scenes/PlanetVisual.tscn") as PackedScene;

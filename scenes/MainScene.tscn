@@ -3,12 +3,13 @@
 [ext_resource type="Script" uid="uid://dq4ckw83kpn0p" path="res://scripts/MainScene.cs" id="1_echbf"]
 [ext_resource type="PackedScene" uid="uid://w30amyv4oxhn" path="res://scenes/PlanetBody.tscn" id="2_611at"]
 [ext_resource type="Script" uid="uid://badr5o25tiws6" path="res://scripts/DebugCamera.cs" id="2_ibiss"]
-[ext_resource type="Shader" uid="uid://djpc4key7lu0n" path="res://shaders/BlankSpace.gdshader" id="3_611at"]
+[ext_resource type="Shader" uid="uid://djpc4key7lu0n" path="res://shaders/SpaceSky.gdshader" id="3_611at"]
 [ext_resource type="Texture2D" uid="uid://bltqqw1ici2mj" path="res://textures/panorama_image.png" id="4_k24pf"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_k24pf"]
 shader = ExtResource("3_611at")
 shader_parameter/sky_tex = ExtResource("4_k24pf")
+shader_parameter/sun_pos = Vector3(1000, 0, -1000)
 
 [sub_resource type="Sky" id="Sky_echbf"]
 sky_material = SubResource("ShaderMaterial_k24pf")
@@ -28,7 +29,7 @@ PlanetScene = ExtResource("2_611at")
 environment = SubResource("Environment_qg23i")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, 0.5, 0, 0, 0)
+transform = Transform3D(-0.707106, 0, 0.707106, 0, 1, 0, -0.707106, 0, -0.707106, 0, 0, 0)
 
 [node name="MainCamera" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 100)
