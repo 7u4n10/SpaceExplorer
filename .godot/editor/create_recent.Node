@@ -1,7 +1,8 @@
+RigidBody3D
+CollisionShape3D
+Node3D
+MeshInstance3D
+Node
 DirectionalLight3D
 WorldEnvironment
 Camera3D
-MeshInstance3D
-Node3D
-CollisionShape3D
-RigidBody3D

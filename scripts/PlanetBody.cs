@@ -1,36 +1,72 @@
 using Godot;
 using System;
 
-public partial class PlanetBody : RigidBody3D
+public partial class PlanetBody : Node3D
 {
-	[Export] public new float Mass = 100f;
+	[Export] public float Mass = 15000;
+	[Export] public float Radius = 25;
 	[Export] public Vector3 Velocity = Vector3.Zero;
 
-	public override void _IntegrateForces(PhysicsDirectBodyState3D state)
-	{
-		state.LinearVelocity = Velocity;
-	}
+	private PlanetVisual _visual;
 
-	public void ApplyGravity(Vector3 force)
+	public override void _Ready()
 	{
-		Velocity += force * (float)GetPhysicsProcessDeltaTime();
-	}
+		// DEBUG
+		GD.Print("[PlanetBody] Calling PlanetSystemManager");
 
-	public void SetColor(Color color)
-	{
-		var material = new StandardMaterial3D();
-		material.AlbedoColor = color;
-		MeshInstance3D visual = GetNode<MeshInstance3D>("Visual");
-		visual.SetSurfaceOverrideMaterial(0, material);
+		PlanetSystemManager.Instance?.AddPlanet(this);
+		
+		// DEBUG
+		GD.Print("[PlanetBody] Calling PlanetVisual().GenerateSurface");
+
+		try {
+			var visScene = GD.Load("res://scenes/PlanetVisual.tscn") as PackedScene;
+			_visual = visScene.Instantiate() as PlanetVisual;
+			_visual.Radius = Radius;
+			if (_visual == null)
+			{
+				GD.PrintErr("[PlanetBody] ERROR: PlanetVisual not found!");
+				return;
+			}
+			AddChild(_visual);
+			_visual.SetOwner(this);
+
+			//_visual.GenerateSurface(Radius);
+		} catch (Exception e) {
+			GD.PrintErr($"[PlanetBody] CRASHED: {e.Message}");
+		}
+		
+		// DEBUG
+		GD.Print($"[PlanetBody] is ready with Radius {Radius}, Mass {Mass}");
 	}
 	
-	public override void _InputEvent(Camera3D camera, InputEvent @event, Vector3 position, Vector3 normal, int shapeIdx)
+	public override void _ExitTree()
 	{
-		if (@event is InputEventMouseButton mouseEvent && mouseEvent.Pressed && mouseEvent.ButtonIndex == MouseButton.Left)
-		{
-			GD.Print(Name + " was clicked.");
-			EmitSignal("PlanetClicked", this);
-		}
+		// DEBUG
+		GD.Print("[PlanetBody/_ExitTree()] ...");
+		PlanetSystemManager.Instance?.RemovePlanet(this);
 	}
 
+	public void ApplyForce(Vector3 force, float delta)
+	{
+		Velocity += force / Mass * delta;
+	}
+
+	public void PhysicsStep(float delta)
+	{
+		GlobalPosition += Velocity * delta;
+	}
+
+	public void MergeWith(PlanetBody other)
+	{
+		float totalMass = Mass + other.Mass;
+		Vector3 newVelocity = (Velocity * Mass + other.Velocity * other.Mass) / totalMass;
+
+		Mass = totalMass;
+		Velocity = newVelocity;
+		Radius = Mathf.Pow(totalMass, 1f / 3f);
+
+		other.QueueFree();
+		_visual.GenerateSurface(Radius);
+	}
 }

@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://dii2v1fjuwx58"]
+
+[ext_resource type="Script" uid="uid://4qxrjqq2cd4t" path="res://scripts/QuadtreePatch.cs" id="1_777ld"]
+[ext_resource type="Shader" uid="uid://dj45o3uhyvrc3" path="res://shaders/TerrainColorShader.gdshader" id="2_t0pib"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sv7ct"]
+render_priority = 0
+shader = ExtResource("2_t0pib")
+shader_parameter/max_height = 25.0
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_777ld"]
+
+[node name="QuadtreePatch" type="Node3D"]
+script = ExtResource("1_777ld")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("ShaderMaterial_sv7ct")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+physics_material_override = SubResource("PhysicsMaterial_777ld")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
