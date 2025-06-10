@@ -37,6 +37,8 @@ public partial class MainScene : Node3D
 		// DEBUG
 		GD.Print($"[MainScene] {orbiter.Name} added at {orbiter.GlobalPosition}");
 	}
+}
+
 	
  // version 3
  // Commented out for demo purposed
@@ -73,7 +75,7 @@ public partial class MainScene : Node3D
 		//planet.Mass = Mathf.Lerp(500f, 1500f, GD.Randf());
 		//planet.Radius = Mathf.Pow(planet.Mass, 1f / 3f);
 	//}
-}
+//}
 
 
 // version 2

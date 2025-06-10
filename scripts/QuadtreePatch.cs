@@ -107,7 +107,7 @@ public partial class QuadtreePatch : Node3D
 		{
 				//GD.Print($"[QuadtreePatch] Generating mesh at LOD index {lodIndex}");
 				var  resolution = LODResolutions[lodIndex];
-				//GD.Print($"[QuadtreePatch] Generating mesh at LOD {resolution}");
+				GD.Print($"[QuadtreePatch] Generating mesh at LOD {resolution}");
 				//GD.Print($"[QuadtreePatch] MeshGenerator is set? {MeshGenerator != null}");
 
 				var mesh = MeshGenerator.GeneratePatchMesh(

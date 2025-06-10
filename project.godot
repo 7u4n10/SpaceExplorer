@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 PlanetSystemManager="*res://scripts/PlanetSystemManager.cs"
+GameStateManager="*res://scripts/GameStateManager.cs"
 
 [dotnet]
 

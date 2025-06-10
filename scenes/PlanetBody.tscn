@@ -1,6 +1,27 @@
-[gd_scene load_steps=2 format=3 uid="uid://w30amyv4oxhn"]
+[gd_scene load_steps=6 format=3 uid="uid://w30amyv4oxhn"]
 
 [ext_resource type="Script" uid="uid://bljcmlvas6tf8" path="res://scripts/PlanetBody.cs" id="1_yyvrs"]
+[ext_resource type="Script" uid="uid://58iq46tgsnj1" path="res://scripts/AtmosphereShell.cs" id="2_0epk8"]
+[ext_resource type="Shader" uid="uid://bns6dei8brjjd" path="res://shaders/AtmosphereShader.gdshader" id="2_dl58j"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4pd5e"]
+render_priority = 0
+shader = ExtResource("2_dl58j")
+shader_parameter/light_dir = Vector3(0, 1, 0)
+shader_parameter/color = Color(0.4, 0.6, 1, 1)
+shader_parameter/intensity = 1.2
+shader_parameter/fade_start = 0.3
+shader_parameter/fade_end = 1.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_yyvrs"]
+material = SubResource("ShaderMaterial_4pd5e")
+radius = 45.0
+height = 90.0
 
 [node name="PlanetBody" type="Node3D"]
 script = ExtResource("1_yyvrs")
+
+[node name="AtmosphereShell" type="MeshInstance3D" parent="." node_paths=PackedStringArray("PlanetBody")]
+mesh = SubResource("SphereMesh_yyvrs")
+script = ExtResource("2_0epk8")
+PlanetBody = NodePath("..")
